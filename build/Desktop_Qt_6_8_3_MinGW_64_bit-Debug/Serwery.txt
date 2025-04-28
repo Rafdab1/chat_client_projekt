@@ -1,2 +1,0 @@
-local host|127.0.0.1
-inny serwer|123.123.123.123
