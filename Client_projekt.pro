@@ -4,10 +4,13 @@ greaterThan(QT_MAJOR_VERSION,4) : QT += widgets
 
 SOURCES += \
     logowanie.cpp \
-    main.cpp
+    main.cpp \
+    podaj_ip_dialog.cpp
 
 FORMS += \
-    logowanie.ui
+    logowanie.ui \
+    podaj_ip_dialog.ui
 
 HEADERS += \
-    logowanie.h
+    logowanie.h \
+    podaj_ip_dialog.h

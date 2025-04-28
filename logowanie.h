@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QHostAddress>
 
+#include "podaj_ip_dialog.h"
+
 namespace Ui {
 class Logowanie;
 }
@@ -20,11 +22,10 @@ public:
 
 private slots:
     void set_adress(QList<QString> lista);
-
-private: //metody
-    void set_serwery();
     void dodaj_serwer();
-
+private: //metody
+    void dodaj_serwer_akcja(QString ip, QString name);
+    void set_serwery();
 private:
     Ui::Logowanie *ui;
     QHostAddress _adress;

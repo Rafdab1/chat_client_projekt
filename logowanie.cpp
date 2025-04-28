@@ -7,6 +7,7 @@ Logowanie::Logowanie(QWidget *parent)
 {
     ui->setupUi(this);
     set_serwery();
+    connect(ui->actionDodaj_Serwer,&QAction::triggered,this,&Logowanie::dodaj_serwer);
 }
 
 Logowanie::~Logowanie()
@@ -18,6 +19,29 @@ void Logowanie::set_adress(QList<QString> lista)
 {
     _adress.setAddress(lista[1]);
     qDebug() << _adress.toString().toUtf8();
+}
+
+void Logowanie::dodaj_serwer()
+{
+    Podaj_ip_dialog *dialog = new Podaj_ip_dialog(this);
+    dialog->exec(); //pozyskanie danych od
+    QList<QString> lista = dialog->podane_dane();
+    if(!lista.empty()){
+        dodaj_serwer_akcja(lista[0],lista[1]);
+    }
+    delete dialog;
+}
+
+void Logowanie::dodaj_serwer_akcja(QString ip, QString name)
+{
+    QAction *Serwer = ui->menuWybor_Serwera->addAction(name);
+    Serwer->setProperty("Adress",ip);
+    connect(Serwer,&QAction::triggered,this,[this,Serwer](){
+        _adress.setAddress(Serwer->property("Adress").toString());
+        ui->server_name_label->setText(Serwer->text());
+        // qDebug() << Serwer->property("Adress").toString();
+        // qDebug() << _adress.toString();
+    });
 }
 
 void Logowanie::set_serwery()
@@ -49,13 +73,7 @@ void Logowanie::set_serwery()
         // for(int i = 0; i < lista.size(); i++){
         //     qDebug() << lista[i];
         // }
-        QAction *Serwer = ui->menuWybor_Serwera->addAction(lista[0]);
-        Serwer->setProperty("Adress",lista[1]);
-        connect(Serwer,&QAction::triggered,this,[this,Serwer](){
-            _adress.setAddress(Serwer->property("Adress").toString());
-            // qDebug() << Serwer->property("Adress").toString();
-            // qDebug() << _adress.toString();
-        });
+        dodaj_serwer_akcja(lista[0],lista[1]);
     }
     file.close();
 }
