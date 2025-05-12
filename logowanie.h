@@ -7,6 +7,7 @@
 #include <QHostAddress>
 
 #include "podaj_ip_dialog.h"
+#include "tworzenie_konta.h"
 
 namespace Ui {
 class Logowanie;
@@ -21,8 +22,9 @@ public:
     ~Logowanie();
 
 private slots:
-    void set_adress(QList<QString> lista);
     void dodaj_serwer();
+    void on_stworz_konto_pushButton_clicked();
+    void sprawdz_polaczenie();
 private: //metody
     void dodaj_serwer_akcja(QString ip, QString name);
     void set_serwery();

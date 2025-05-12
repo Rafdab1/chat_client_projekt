@@ -8,17 +8,12 @@ Logowanie::Logowanie(QWidget *parent)
     ui->setupUi(this);
     set_serwery();
     connect(ui->actionDodaj_Serwer,&QAction::triggered,this,&Logowanie::dodaj_serwer);
+    connect(ui->actionSprawdz_Po_czenie,&QAction::triggered,this,&Logowanie::sprawdz_polaczenie);
 }
 
 Logowanie::~Logowanie()
 {
     delete ui;
-}
-
-void Logowanie::set_adress(QList<QString> lista)
-{
-    _adress.setAddress(lista[1]);
-    qDebug() << _adress.toString().toUtf8();
 }
 
 void Logowanie::dodaj_serwer()
@@ -76,4 +71,22 @@ void Logowanie::set_serwery()
         dodaj_serwer_akcja(lista[0],lista[1]);
     }
     file.close();
+}
+
+void Logowanie::on_stworz_konto_pushButton_clicked()
+{
+    Tworzenie_konta* dialog = new Tworzenie_konta(_adress,this);
+    if(dialog->_connected == true){
+        dialog->exec();
+    }else
+    {
+        QMessageBox::information(this,"Tworzenie konta", "Brak połączenia z serwerem");
+    }
+    delete dialog;
+    qDebug()<<"Zamknięto okno";
+}
+
+void Logowanie::sprawdz_polaczenie()
+{
+
 }
