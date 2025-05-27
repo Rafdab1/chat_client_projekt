@@ -27,7 +27,7 @@ Tworzenie_konta::~Tworzenie_konta()
 void Tworzenie_konta::on_potwierdz_Button_clicked()
 {
     QString message = "";
-    message += sformatowany_czas() + ">>" + "Tworzenie konta:";
+    message += sformatowany_czas() + ">>" + "Tworzenie konta" + "<<";
     QString dane_konta = ui->imie_Edit->text() + "|" + ui->nazwisko_Edit->text() + "|" + ui->email_Edit->text();
     message += dane_konta;
     qDebug()<<message;
