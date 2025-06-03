@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QDateTime>
 #include <QDebug>
+#include <QMessageBox>
 #include "funkcje_pomocnicze.h"
 #include "client_manager.h"
 
@@ -23,7 +24,10 @@ private slots:
     void on_potwierdz_Button_clicked();
     void on_connection();
     void on_disconnect();
+    void on_odpowiedz_recived(QByteArray data);
 
+private:
+    bool check_password();
 private:
     Ui::Tworzenie_konta *ui;
     Client_manager *polaczenie;

@@ -11,7 +11,6 @@ public:
     explicit Client_manager(QHostAddress ip, QObject *parent = nullptr);
     void connect_To_Server();
     void sendMessage(QString message);
-    void get_state();
 signals:
     void connected();
     void disconected();
