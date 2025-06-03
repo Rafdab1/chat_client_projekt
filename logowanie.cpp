@@ -90,3 +90,28 @@ void Logowanie::sprawdz_polaczenie()
 {
 
 }
+
+void Logowanie::on_zaloguj_Button_clicked()
+{
+    QString email = ui->email_Edit->text();
+    QString haslo = ui->haslo_Edit->text();
+
+    _client = new Client_manager(_adress);
+    connect(_client, &Client_manager::dataRecived,this,&Logowanie::data_recived);
+    _client->connect_To_Server();
+    QString message = sformatowany_czas() + ">>" + "Logowanie" +"<<" + email + "|" + haslo;
+    _client->sendMessage(message);
+}
+
+void Logowanie::data_recived(QByteArray data)
+{
+    QString wiadomosc = QString::fromStdString(data.toStdString());
+    if (wiadomosc == "Zalogowano"){
+        QMessageBox::information(this,"Logowanie","Zalogowano");
+    }
+    else{
+        QMessageBox::information(this,"Logowanie","Nie zalogowano");
+    }
+
+}
+
