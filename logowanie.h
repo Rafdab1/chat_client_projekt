@@ -10,6 +10,7 @@
 #include "podaj_ip_dialog.h"
 #include "tworzenie_konta.h"
 #include "funkcje_pomocnicze.h"
+#include "okno_chat.h"
 
 namespace Ui {
 class Logowanie;
@@ -37,6 +38,7 @@ private:
     Ui::Logowanie *ui;
     QHostAddress _adress;
     Client_manager *_client;
+    okno_chat *_chat;
 };
 
 #endif // LOGOWANIE_H

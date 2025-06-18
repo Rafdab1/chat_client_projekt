@@ -13,6 +13,7 @@ Logowanie::Logowanie(QWidget *parent)
 
 Logowanie::~Logowanie()
 {
+    qDebug() << "dupa logowanie";
     delete ui;
 }
 
@@ -108,9 +109,24 @@ void Logowanie::data_recived(QByteArray data)
     QString wiadomosc = QString::fromStdString(data.toStdString());
     if (wiadomosc == "Zalogowano"){
         QMessageBox::information(this,"Logowanie","Zalogowano");
+        disconnect(_client,&Client_manager::dataRecived,nullptr,nullptr);
+        _chat = new okno_chat(_client,this);
+        this->hide();
+        switch (_chat->exec()) {
+        case QDialog::Accepted:
+            this->show();
+            break;
+        case QDialog::Rejected:
+            delete _chat;
+            _client->disconect_from_server();
+            delete _client;
+            this->show();
+            break;
+        }
     }
     else{
         QMessageBox::information(this,"Logowanie","Nie zalogowano");
+        delete _client;
     }
 
 }

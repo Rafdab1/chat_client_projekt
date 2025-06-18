@@ -4,7 +4,7 @@
 int main(int argc, char *argv[]){
     QApplication app(argc,argv);
     Logowanie start;
-    start.show();
     start.setFixedSize(start.size());
+    start.show();
     return app.exec();
 }

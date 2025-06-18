@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>konwersacjaWidget</class>
+ <widget class="QWidget" name="konwersacjaWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>223</width>
+    <height>67</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="nazwaKonwersacji_label">
+     <property name="text">
+      <string>Nazwa konwersacji</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="wysylajacy_label">
+       <property name="text">
+        <string>Wysyłający:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="trescWiadomosci_label">
+       <property name="text">
+        <string>Treść wiadomości</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
