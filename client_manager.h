@@ -10,6 +10,9 @@ class Client_manager : public QObject
 public:
     explicit Client_manager(QHostAddress ip, QObject *parent = nullptr);
     ~Client_manager();
+
+    QHostAddress ip;
+
     void connect_To_Server();
     void disconect_from_server();
     void sendMessage(QString message);
@@ -25,7 +28,6 @@ private slots:
 
 private:
     QTcpSocket *_socket;
-    QHostAddress _ip;
 };
 
 #endif // CLIENT_MANAGER_H

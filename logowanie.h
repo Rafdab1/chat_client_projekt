@@ -1,7 +1,7 @@
 #ifndef LOGOWANIE_H
 #define LOGOWANIE_H
 
-#include <QMainWindow>
+#include <QDialog>
 #include <QFile>
 #include <QDebug>
 #include <QHostAddress>
@@ -10,18 +10,17 @@
 #include "podaj_ip_dialog.h"
 #include "tworzenie_konta.h"
 #include "funkcje_pomocnicze.h"
-#include "okno_chat.h"
 
 namespace Ui {
 class Logowanie;
 }
 
-class Logowanie : public QMainWindow
+class Logowanie : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit Logowanie(QWidget *parent = nullptr);
+    explicit Logowanie(Client_manager *client,QWidget *parent = nullptr);
     ~Logowanie();
 
 private slots:
@@ -38,7 +37,6 @@ private:
     Ui::Logowanie *ui;
     QHostAddress _adress;
     Client_manager *_client;
-    okno_chat *_chat;
 };
 
 #endif // LOGOWANIE_H

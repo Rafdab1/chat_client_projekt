@@ -2,7 +2,7 @@
 
 Client_manager::Client_manager(QHostAddress ip, QObject *parent)
     :QObject{parent},
-    _ip(ip)
+    ip(ip)
 {
     _socket = new QTcpSocket(this);
     connect(_socket, &QTcpSocket::connected,this,&Client_manager::connected);
@@ -17,7 +17,7 @@ Client_manager::~Client_manager()
 
 void Client_manager::connect_To_Server()
 {
-    _socket->connectToHost(_ip,4500);
+    _socket->connectToHost(ip,4500);
 }
 
 void Client_manager::disconect_from_server()

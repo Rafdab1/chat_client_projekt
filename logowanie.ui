@@ -1,128 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Logowanie</class>
- <widget class="QMainWindow" name="Logowanie">
+ <widget class="QDialog" name="Logowanie">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>422</width>
-    <height>225</height>
+    <height>187</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Logowanie</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
-    <item>
-     <widget class="QGroupBox" name="groupBox">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QMenuBar" name="menubar">
+     <widget class="QMenu" name="opcje_menu">
       <property name="title">
-       <string/>
+       <string>opcje</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0" colspan="4">
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Email:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="email_Edit"/>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QLabel" name="haslo_label">
-             <property name="text">
-              <string>Hasło:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="haslo_Edit"/>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Wybrany Serwer:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="stworz_konto_pushButton">
-         <property name="text">
-          <string>Stwórz konto</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QPushButton" name="zaloguj_Button">
-         <property name="text">
-          <string>Zaloguj</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>291</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="1" colspan="2">
-        <widget class="QLabel" name="server_name_label">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QMenu" name="menuWybor_Serwera">
+       <property name="title">
+        <string>Wybór Serwera</string>
+       </property>
+       <addaction name="actionDodaj_Serwer"/>
+      </widget>
+      <addaction name="menuWybor_Serwera"/>
+      <addaction name="actionSprawdz_Po_czenie"/>
      </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>422</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="opcje_menu">
-    <property name="title">
-     <string>opcje</string>
-    </property>
-    <widget class="QMenu" name="menuWybor_Serwera">
-     <property name="title">
-      <string>Wybór Serwera</string>
-     </property>
-     <addaction name="actionDodaj_Serwer"/>
+     <addaction name="opcje_menu"/>
     </widget>
-    <addaction name="menuWybor_Serwera"/>
-    <addaction name="actionSprawdz_Po_czenie"/>
-   </widget>
-   <addaction name="opcje_menu"/>
-  </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string/>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0" colspan="4">
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Email:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="email_Edit"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="haslo_label">
+              <property name="text">
+               <string>Hasło:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="haslo_Edit"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Wybrany Serwer:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="stworz_konto_pushButton">
+          <property name="text">
+           <string>Stwórz konto</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QPushButton" name="zaloguj_Button">
+          <property name="text">
+           <string>Zaloguj</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>291</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="1" colspan="2">
+         <widget class="QLabel" name="server_name_label">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
   <action name="actionSprawdz_Po_czenie">
    <property name="text">
     <string>Sprawdz Połączenie</string>

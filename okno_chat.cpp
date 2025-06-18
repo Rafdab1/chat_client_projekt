@@ -1,47 +1,41 @@
 #include "okno_chat.h"
 #include "ui_okno_chat.h"
 
-okno_chat::okno_chat(Client_manager *client, QWidget *parent)
-    : QDialog(parent)
+okno_chat::okno_chat(QWidget *parent)
+    : QMainWindow(parent)
     , ui(new Ui::okno_chat)
 {
     ui->setupUi(this);
-    _client = client;
-    connect(_client,&Client_manager::dataRecived,this,&okno_chat::setup_read);
-    connect(_client,&Client_manager::dataRecived,this,&okno_chat::running_read);
-    _client->check_data_recived_recivers();
-    request_conversationn_list();
-    this->dumpObjectInfo();
+    _client = new Client_manager(QHostAddress::LocalHost);
+    this->setAttribute(Qt::WA_QuitOnClose);
+    Logowanie *okno_logowania_dialog = new Logowanie(_client);
+    switch (okno_logowania_dialog->exec()) {
+    case QDialog::Accepted:
+        zalogowany = true;
+        break;
+    case QDialog::Rejected:
+        zalogowany = false;
+        break;
+    }
+    delete okno_logowania_dialog;
 }
+
+
 
 okno_chat::~okno_chat()
 {
-    qDebug() << "chat dupa";
+    _client->disconect_from_server();
+    qDebug() << "dupa chat_okno";
+    delete _client;
     delete ui;
 }
 
-void okno_chat::setup_read(QByteArray data)
+void okno_chat::setup_read()
 {
-    qDebug() << "debug";
-    QString dane = QString::fromStdString(data.toStdString());
-    qDebug() << dane;
+
 }
 
-void okno_chat::running_read(QByteArray data)
+void okno_chat::run_read()
 {
-    qDebug() << data.toStdString();
+
 }
-
-void okno_chat::request_conversationn_list()
-{
-    QString message = sformatowany_czas() +">>Lista konwersacji<<";
-    _client->sendMessage(message);
-    _client->wait_for_responce(30000);
-}
-
-
-void okno_chat::on_pushButton_clicked()
-{
-    qDebug() << _client->read_data().toStdString();
-}
-
