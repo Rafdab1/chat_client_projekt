@@ -101,13 +101,13 @@ void Logowanie::on_zaloguj_Button_clicked()
 void Logowanie::data_recived(QByteArray data)
 {
     QString wiadomosc = QString::fromStdString(data.toStdString());
-    if (wiadomosc == "Zalogowano") {
+    if (wiadomosc.startsWith("Zalogowano")) {
         QMessageBox::information(this, "Logowanie", "Zalogowano");
         disconnect(_client,&Client_manager::dataRecived,nullptr,nullptr);
+        emit send_nazwa(wiadomosc.split(":").last());
         this->accept();
         qDebug() << _client;
     } else {
         QMessageBox::information(this, "Logowanie", "Nie zalogowano");
-        this->reject();
     }
 }

@@ -30,6 +30,9 @@ private slots:
     void on_zaloguj_Button_clicked();
     void data_recived(QByteArray data);
 
+signals:
+    void send_nazwa(QString nazwa);
+
 private: //metody
     void dodaj_serwer_akcja(QString ip, QString name);
     void set_serwery();

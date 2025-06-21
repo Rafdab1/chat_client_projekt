@@ -2,10 +2,13 @@
 #define OKNO_CHAT_H
 
 #include <QMainWindow>
-#include "logowanie.h"
-#include "client_manager.h"
 #include <QDebug>
 #include <QTimer>
+
+#include "logowanie.h"
+#include "client_manager.h"
+#include "funkcje_pomocnicze.h"
+#include "konwersacjawidget.h"
 
 namespace Ui {
 class okno_chat;
@@ -21,12 +24,18 @@ public:
     bool zalogowany;
 
 private slots:
-    void setup_read();
-    void run_read();
+    void set_imie_nazwisko(QString nazwa);
+    void setup_read(QByteArray data);
+    void run_read(QByteArray data);
 
+private:
+    void setup_okno();
+    void request_konwersacje();
+    void setup_konwersacje(QString lista);
 private:
     Ui::okno_chat *ui;
     Client_manager *_client;
+    QString imie_nazwisko;
 };
 
 #endif // OKNO_CHAT_H

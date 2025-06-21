@@ -12,11 +12,14 @@ class konwersacjaWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit konwersacjaWidget(QWidget *parent = nullptr);
+    explicit konwersacjaWidget(QString &nazwa , QString &ostatnia, QString &tresc,QWidget *parent = nullptr);
     ~konwersacjaWidget();
 
 private:
     Ui::konwersacjaWidget *ui;
+    QString nazwa_konwersacji;
+    QString ostatni_wysylajacy;
+    QString tresc_wiadomosci;
 };
 
 #endif // KONWERSACJAWIDGET_H
