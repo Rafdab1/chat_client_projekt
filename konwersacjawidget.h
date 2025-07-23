@@ -15,6 +15,15 @@ public:
     explicit konwersacjaWidget(QString &nazwa , QString &ostatnia, QString &tresc,QWidget *parent = nullptr);
     ~konwersacjaWidget();
 
+    QString getNazwa_konwersacji() const;
+    void setNazwa_konwersacji(const QString &newNazwa_konwersacji);
+
+    QString getOstatni_wysylajacy() const;
+    void setOstatni_wysylajacy(const QString &newOstatni_wysylajacy);
+
+    QString getTresc_wiadomosci() const;
+    void setTresc_wiadomosci(const QString &newTresc_wiadomosci);
+
 private:
     Ui::konwersacjaWidget *ui;
     QString nazwa_konwersacji;

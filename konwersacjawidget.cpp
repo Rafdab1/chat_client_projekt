@@ -18,3 +18,33 @@ konwersacjaWidget::~konwersacjaWidget()
 {
     delete ui;
 }
+
+QString konwersacjaWidget::getNazwa_konwersacji() const
+{
+    return nazwa_konwersacji;
+}
+
+void konwersacjaWidget::setNazwa_konwersacji(const QString &newNazwa_konwersacji)
+{
+    nazwa_konwersacji = newNazwa_konwersacji;
+}
+
+QString konwersacjaWidget::getOstatni_wysylajacy() const
+{
+    return ostatni_wysylajacy;
+}
+
+void konwersacjaWidget::setOstatni_wysylajacy(const QString &newOstatni_wysylajacy)
+{
+    ostatni_wysylajacy = newOstatni_wysylajacy;
+}
+
+QString konwersacjaWidget::getTresc_wiadomosci() const
+{
+    return tresc_wiadomosci;
+}
+
+void konwersacjaWidget::setTresc_wiadomosci(const QString &newTresc_wiadomosci)
+{
+    tresc_wiadomosci = newTresc_wiadomosci;
+}

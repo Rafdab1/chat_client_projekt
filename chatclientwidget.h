@@ -12,11 +12,13 @@ class ChatClientWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit ChatClientWidget(QWidget *parent = nullptr);
+    explicit ChatClientWidget(QString nazwa_konwersacji = "", QString wiadomosci = "",QWidget *parent = nullptr);
     ~ChatClientWidget();
+
 
 private:
     Ui::ChatClientWidget *ui;
+    QString nazwa_konwersacji;
 };
 
 #endif // CHATCLIENTWIDGET_H
