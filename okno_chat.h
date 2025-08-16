@@ -32,8 +32,7 @@ private slots:
     void run_read(QByteArray data);   
     void on_konwersacje_lista_itemClicked(QListWidgetItem *item);
     void on_chat_client_widget_tab_close(int index);
-
-    void on_tabWidget_currentChanged(int index);
+    void wyslij_wiadomosc(QString wiadomosc);
 
 private:
     void setup_okno();

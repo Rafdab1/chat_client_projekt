@@ -95,14 +95,15 @@ void okno_chat::open_conversation_window(QString dane)
 {
     QStringList list = dane.split("<<");
     open_chats.append(list[0]);
-    ChatClientWidget *widget;
+    ChatClientWidget *nowe_okno;
     if(list.size() == 2){
-        widget = new ChatClientWidget(list[0],list[0]);
+        nowe_okno = new ChatClientWidget(list[0],list[1]);
     }
     else
-        widget = new ChatClientWidget(list[0]);
+        nowe_okno = new ChatClientWidget(list[0]);
+    connect(nowe_okno,&ChatClientWidget::send_message,this,&okno_chat::wyslij_wiadomosc);
     int index;
-    index = ui->tabWidget->addTab(widget,list[0]);
+    index = ui->tabWidget->addTab(nowe_okno,list[0]);
     ui->tabWidget->setCurrentIndex(index);
 
     //qDebug() << "Count: " << ui->tabWidget->count();
@@ -114,7 +115,6 @@ void okno_chat::on_konwersacje_lista_itemClicked(QListWidgetItem *item)
     if(open_chats.contains(item->text())){
         int count = ui->tabWidget->count();
         for(int i = 0; i < count; i ++){
-            qDebug() << ui->tabWidget->tabText(i) << item->text();
             if(ui->tabWidget->tabText(i) == item->text()){
                 ui->tabWidget->setCurrentIndex(i);
                 break;
@@ -133,8 +133,7 @@ void okno_chat::on_chat_client_widget_tab_close(int index)
 
 }
 
-void okno_chat::on_tabWidget_currentChanged(int index)
+void okno_chat::wyslij_wiadomosc(QString wiadomosc)
 {
-    //qDebug() << "Current index:" << index;
-}
 
+}
