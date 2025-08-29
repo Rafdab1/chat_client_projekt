@@ -3,6 +3,7 @@ QT += core gui network
 greaterThan(QT_MAJOR_VERSION,4) : QT += widgets
 
 SOURCES += \
+    chat_message.cpp \
     chatclientwidget.cpp \
     client_manager.cpp \
     funkcje_pomocnicze.cpp \
@@ -14,6 +15,7 @@ SOURCES += \
     tworzenie_konta.cpp
 
 FORMS += \
+    chat_message.ui \
     chatclientwidget.ui \
     konwersacjawidget.ui \
     logowanie.ui \
@@ -22,6 +24,7 @@ FORMS += \
     tworzenie_konta.ui
 
 HEADERS += \
+    chat_message.h \
     chatclientwidget.h \
     client_manager.h \
     funkcje_pomocnicze.h \

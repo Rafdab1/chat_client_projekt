@@ -48,3 +48,9 @@ void konwersacjaWidget::setTresc_wiadomosci(const QString &newTresc_wiadomosci)
 {
     tresc_wiadomosci = newTresc_wiadomosci;
 }
+
+void konwersacjaWidget::update(QStringList wiadomosc)
+{
+    ui->wysylajacy_label->setText(wiadomosc[1]);
+    ui->trescWiadomosci_label->setText(wiadomosc[2]);
+}

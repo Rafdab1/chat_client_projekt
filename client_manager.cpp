@@ -50,7 +50,6 @@ bool Client_manager::wait_for_responce(int ms)
 void Client_manager::readyRead()
 {
     QByteArray data = _socket->readAll();
-    qDebug() << "Recived";
     qDebug() << "Client_manager: " + QString::fromStdString(data.toStdString());
     emit dataRecived(data);
 }

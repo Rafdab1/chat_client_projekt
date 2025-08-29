@@ -33,18 +33,21 @@ private slots:
     void on_konwersacje_lista_itemClicked(QListWidgetItem *item);
     void on_chat_client_widget_tab_close(int index);
     void wyslij_wiadomosc(QString wiadomosc);
-
+    void zamkniecie_okna_chatu(ChatClientWidget* addres);
 private:
     void setup_okno();
     void request_konwersacje();
     void setup_konwersacje(QString lista);
     void request_konwersacja_data(QString nazwa_konwersacji);
     void open_conversation_window(QString dane);
+    void odbieranie_wiadomosci(QString wiadomosc);
 private:
     Ui::okno_chat *ui;
     Client_manager *_client;
     QString imie_nazwisko;
     QStringList open_chats;
+    QList<konwersacjaWidget*> kon_wig;
+    QList<ChatClientWidget*> chat_wig;
 };
 
 #endif // OKNO_CHAT_H

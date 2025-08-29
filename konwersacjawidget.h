@@ -24,6 +24,8 @@ public:
     QString getTresc_wiadomosci() const;
     void setTresc_wiadomosci(const QString &newTresc_wiadomosci);
 
+    void update(QStringList wiadomosc);
+
 private:
     Ui::konwersacjaWidget *ui;
     QString nazwa_konwersacji;

@@ -46,11 +46,13 @@ void okno_chat::setup_read(QByteArray data)
 {
     //qDebug() << "Setup read: " + data.toStdString();
     QString polecenie = QString::fromStdString(data.toStdString()).split(">>")[0];
-    //qDebug() << "Polecenie: " + polecenie;
+    QString tresc = QString::fromStdString(data.toStdString()).split(">>")[1];
     if(polecenie == "Lista konwersacji"){
-        setup_konwersacje(QString::fromStdString(data.toStdString()).split(">>")[1]);
+        setup_konwersacje(tresc);
     }else if(polecenie == "Dane konwersacji"){
-        open_conversation_window(QString::fromStdString(data.toStdString()).split(">>")[1]);
+        open_conversation_window(tresc);
+    }else if(polecenie == "Nowa wiadomosc"){
+        odbieranie_wiadomosci(tresc);
     }
 }
 
@@ -83,6 +85,7 @@ void okno_chat::setup_konwersacje(QString lista)
         listwidgetitem->setSizeHint(QSize(0,65));
         ui->konwersacje_lista->addItem(listwidgetitem);
         ui->konwersacje_lista->setItemWidget(listwidgetitem,widget);
+        kon_wig.append(widget);
     }
 }
 
@@ -96,17 +99,46 @@ void okno_chat::open_conversation_window(QString dane)
     QStringList list = dane.split("<<");
     open_chats.append(list[0]);
     ChatClientWidget *nowe_okno;
-    if(list.size() == 2){
+    if(list.size() == 2)
         nowe_okno = new ChatClientWidget(list[0],list[1]);
-    }
     else
         nowe_okno = new ChatClientWidget(list[0]);
     connect(nowe_okno,&ChatClientWidget::send_message,this,&okno_chat::wyslij_wiadomosc);
+    connect(nowe_okno,&ChatClientWidget::zamkniecie_okna,this,&okno_chat::zamkniecie_okna_chatu);
     int index;
     index = ui->tabWidget->addTab(nowe_okno,list[0]);
     ui->tabWidget->setCurrentIndex(index);
-
+    chat_wig.append(nowe_okno);
     //qDebug() << "Count: " << ui->tabWidget->count();
+}
+
+void okno_chat::odbieranie_wiadomosci(QString wiadomosc)
+{
+    QStringList lista = wiadomosc.split("|");
+    qDebug() << lista;
+    QString nazwa_konwersacji = lista[0];
+    lista.pop_front();
+    //otwarty czat
+    int count = ui->tabWidget->count();
+    for(int i = 0;i < count; i++){
+        if(ui->tabWidget->tabText(i) == nazwa_konwersacji){
+            for(int j = 0;j < chat_wig.count(); j++){
+                if(chat_wig[j]->getNazwa_konwersacji() == nazwa_konwersacji){
+                    chat_wig[j]->nowa_wiadomosc(lista);
+                    break;
+                }
+            }
+            break;
+        }
+    }
+    //aktualizowanie listy konwersacji
+    count = kon_wig.count();
+    for(int i = 0; i< count ; i++){
+        if(kon_wig[i]->getNazwa_konwersacji() == nazwa_konwersacji){
+            kon_wig[i]->update(lista);
+            break;
+        }
+    }
 }
 
 
@@ -135,5 +167,10 @@ void okno_chat::on_chat_client_widget_tab_close(int index)
 
 void okno_chat::wyslij_wiadomosc(QString wiadomosc)
 {
+    _client->sendMessage(sformatowany_czas() + ">>Wyslana wiadomosc<<" + wiadomosc);
+}
 
+void okno_chat::zamkniecie_okna_chatu(ChatClientWidget *addres)
+{
+    chat_wig.removeOne(addres);
 }
