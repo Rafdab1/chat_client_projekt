@@ -26,6 +26,7 @@ void ChatClientWidget::nowa_wiadomosc(QStringList lista)
     item->setSizeHint(QSize(0,65));
     ui->listWidget->addItem(item);
     ui->listWidget->setItemWidget(item,message);
+    ui->listWidget->scrollToBottom();
 }
 
 void ChatClientWidget::set_messages(QString wiadomosci)
@@ -41,6 +42,7 @@ void ChatClientWidget::set_messages(QString wiadomosci)
         ui->listWidget->addItem(item);
         ui->listWidget->setItemWidget(item,message);
     }
+    ui->listWidget->scrollToBottom();
 }
 
 QString ChatClientWidget::getNazwa_konwersacji() const

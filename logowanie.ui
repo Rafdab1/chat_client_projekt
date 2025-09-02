@@ -130,6 +130,12 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>email_Edit</tabstop>
+  <tabstop>haslo_Edit</tabstop>
+  <tabstop>zaloguj_Button</tabstop>
+  <tabstop>stworz_konto_pushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

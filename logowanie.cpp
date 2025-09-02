@@ -109,5 +109,7 @@ void Logowanie::data_recived(QByteArray data)
         qDebug() << _client;
     } else {
         QMessageBox::information(this, "Logowanie", "Nie zalogowano");
+        disconnect(_client,&Client_manager::dataRecived,nullptr,nullptr);
+        _client->disconect_from_server();
     }
 }

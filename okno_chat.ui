@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>735</width>
+    <height>541</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -44,6 +44,13 @@
          </layout>
         </item>
         <item>
+         <widget class="QLineEdit" name="Search_edit">
+          <property name="text">
+           <string>Wyszukaj konwersację</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QListWidget" name="konwersacje_lista"/>
         </item>
        </layout>
@@ -64,17 +71,23 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>735</width>
      <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuWyloguj">
     <property name="title">
-     <string>Wyloguj</string>
+     <string>Opcje</string>
     </property>
+    <addaction name="wyloguj_action"/>
    </widget>
    <addaction name="menuWyloguj"/>
   </widget>
+  <action name="wyloguj_action">
+   <property name="text">
+    <string>Wyloguj</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

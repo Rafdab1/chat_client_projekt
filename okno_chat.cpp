@@ -8,26 +8,11 @@ okno_chat::okno_chat(QWidget *parent)
     ui->setupUi(this);
     ui->tabWidget->setTabsClosable(true);
     connect(ui->tabWidget->tabBar(), &QTabBar::tabCloseRequested, this, &okno_chat::on_chat_client_widget_tab_close);
+    connect(ui->wyloguj_action, &QAction::triggered, this, &okno_chat::wylogowanie);
     this->setAttribute(Qt::WA_QuitOnClose);
 
     _client = new Client_manager(QHostAddress::LocalHost);
-    Logowanie *okno_logowania_dialog = new Logowanie(_client);
-    connect(okno_logowania_dialog,&Logowanie::send_nazwa,this,&okno_chat::set_imie_nazwisko);
-
-
-    switch (okno_logowania_dialog->exec()) {
-    case QDialog::Accepted:
-        zalogowany = true;
-        connect(_client,&Client_manager::dataRecived,this,&okno_chat::setup_read);
-        break;
-    case QDialog::Rejected:
-        _client->disconect_from_server();
-        delete _client;
-        zalogowany = false;
-        break;
-    }
-    setup_okno();
-    delete okno_logowania_dialog;
+    setup_logowanie();
 }
 
 okno_chat::~okno_chat()
@@ -64,6 +49,23 @@ void okno_chat::setup_okno()
 {
     ui->nazwa_konta_lable->setText(imie_nazwisko);
     request_konwersacje();
+}
+
+void okno_chat::setup_logowanie()
+{
+    Logowanie *okno_logowania_dialog = new Logowanie(_client);
+    connect(okno_logowania_dialog,&Logowanie::send_nazwa,this,&okno_chat::set_imie_nazwisko);
+    switch (okno_logowania_dialog->exec()) {
+    case QDialog::Accepted:
+        zalogowany = true;
+        connect(_client,&Client_manager::dataRecived,this,&okno_chat::setup_read);
+        this->show();
+        break;
+    case QDialog::Rejected:
+        break;
+    }
+    setup_okno();
+    delete okno_logowania_dialog;
 }
 
 void okno_chat::request_konwersacje()
@@ -141,6 +143,25 @@ void okno_chat::odbieranie_wiadomosci(QString wiadomosc)
     }
 }
 
+void okno_chat::clear_okno()
+{
+    ui->konwersacje_lista->clear();
+    ui->tabWidget->clear();
+    open_chats.clear();
+    int count = kon_wig.count();
+    for(int i = 0;i < count; i++){
+        konwersacjaWidget* temp = kon_wig.front();
+        kon_wig.pop_front();
+        delete temp;
+    }
+    count = chat_wig.count();
+    for(int i =0;i < count;i++){
+        ChatClientWidget* temp = chat_wig.front();
+        chat_wig.pop_front();
+        delete temp;
+    }
+}
+
 
 void okno_chat::on_konwersacje_lista_itemClicked(QListWidgetItem *item)
 {
@@ -174,3 +195,26 @@ void okno_chat::zamkniecie_okna_chatu(ChatClientWidget *addres)
 {
     chat_wig.removeOne(addres);
 }
+
+void okno_chat::on_Search_edit_textChanged(const QString &arg1)
+{
+    int count = kon_wig.count();
+    for(int i =0;i < count; i++){
+        if(!kon_wig[i]->getNazwa_konwersacji().contains(arg1)){
+            kon_wig[i]->hide();
+        }
+        else{
+            kon_wig[i]->show();
+        }
+    }
+}
+
+void okno_chat::wylogowanie()
+{
+    this->hide();
+    clear_okno();
+    _client->disconect_from_server();
+    disconnect(_client, &Client_manager::dataRecived,nullptr,nullptr);
+    setup_logowanie();
+}
+

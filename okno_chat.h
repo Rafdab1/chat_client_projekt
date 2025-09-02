@@ -34,13 +34,18 @@ private slots:
     void on_chat_client_widget_tab_close(int index);
     void wyslij_wiadomosc(QString wiadomosc);
     void zamkniecie_okna_chatu(ChatClientWidget* addres);
+    void on_Search_edit_textChanged(const QString &arg1);
+    void wylogowanie();
+
 private:
     void setup_okno();
+    void setup_logowanie();
     void request_konwersacje();
     void setup_konwersacje(QString lista);
     void request_konwersacja_data(QString nazwa_konwersacji);
     void open_conversation_window(QString dane);
     void odbieranie_wiadomosci(QString wiadomosc);
+    void clear_okno();
 private:
     Ui::okno_chat *ui;
     Client_manager *_client;
